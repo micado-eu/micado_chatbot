@@ -1,0 +1,82 @@
+intents:
+  - chitchat:
+      use_entities: []
+  - request_document:
+      use_entities: []
+  - affirm
+  - deny
+  - stop
+  - thankyou
+  - greet
+  - bot_challenge
+
+entities:
+  - document
+
+slots:
+  document:
+    type: unfeaturized
+    auto_fill: false
+  requested_slot:
+    type: unfeaturized
+
+#actions:
+#- utter_greet
+#- utter_cheer_up
+#- utter_did_that_help
+#- utter_happy
+#- utter_goodbye
+
+
+responses:
+  utter_ask_preferences:
+    - text: "please provide additional preferences"
+  utter_ask_feedback:
+    - text: "please give your feedback on your experience so far"
+  utter_submit:
+    - text: "All done!"
+  utter_ask_document:
+    - text: "what document do you need?"
+  utter_slots_values_document:
+    - text: "you need to follow the process for the document:\n
+             - document: {document}"
+  utter_noworries:
+    - text: "you are welcome :)"
+  utter_chitchat:
+    - text: "chitchat"
+  utter_ask_continue:
+    - text: "do you want to continue?"
+  utter_wrong_cuisine:
+    - text: "cuisine type is not in the database, please try again"
+  utter_wrong_document:
+    - text: "I cannot help you with that document"
+  utter_wrong_num_people:
+    - text: "number of people should be a positive integer, please try again"
+  utter_wrong_outdoor_seating:
+    - text: "could not convert input to boolean value, please try again"
+  utter_default:
+    - text: "sorry, I didn't understand you, please try input something else"
+  utter_greet:
+    - custom:
+        data:
+        - type: section
+          text:
+            text: "Make a bet on when the world will end:"
+            type: mrkdwn
+          accessory:
+            type: datepicker
+            initial_date: '2019-05-21'
+            placeholder:
+              type: plain_text
+              text: Select a date
+  utter_iamabot:
+    - text: "I am a bot, powered by Rasa."
+  utter_restart:
+    - text: "restarted"
+
+forms:
+  - document_form
+
+session_config:
+  session_expiration_time: 5  # value in minutes
+  carry_over_slots_to_new_session: false
