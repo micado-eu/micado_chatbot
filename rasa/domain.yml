@@ -2,7 +2,8 @@ intents:
   - chitchat:
       use_entities: []
   - request_document:
-      use_entities: []
+      use_entities:
+        - document
   - affirm
   - deny
   - stop
@@ -35,6 +36,8 @@ responses:
     - text: "please give your feedback on your experience so far"
   utter_submit:
     - text: "All done!"
+  utter_ask_document_form:
+    - text: "You need to tell me what document you need"
   utter_ask_document:
     - text: "what document do you need?"
   utter_slots_values_document:
@@ -75,7 +78,10 @@ responses:
     - text: "restarted"
 
 forms:
-  - document_form
+  document_form:
+    document:
+      - type: from_entity
+        entity: document
 
 session_config:
   session_expiration_time: 5  # value in minutes
