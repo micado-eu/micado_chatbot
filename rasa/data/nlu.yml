@@ -44,6 +44,7 @@ nlu:
     - I need an [identity card](document)
     - i want a [residence permit](document)
     - i want a [stamp duty](document)
+    - i want a [passport](document)
     - i want an [identity card](document)
 
 - intent: affirm

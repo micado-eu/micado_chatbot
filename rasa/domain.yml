@@ -83,6 +83,7 @@ responses:
 
 actions:
 - validate_document_form
+- action_submit_document_form
 
 forms:
   document_form:

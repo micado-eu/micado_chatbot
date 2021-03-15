@@ -4,10 +4,13 @@ language: en
 #pipeline: supervised_embeddings
 pipeline:
   - name: WhitespaceTokenizer
-  - name: LexicalSyntacticFeaturizer
   - name: RegexFeaturizer
+  - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
-    token_pattern: (?u)\b\w+\b
+  - name: CountVectorsFeaturizer
+    analyzer: "char_wb"
+    min_ngram: 1
+    max_ngram: 4
 #  - name: DucklingHTTPExtractor
 #    url: http://duckling_server:8000
 #    dimensions:
@@ -21,9 +24,9 @@ pipeline:
 # Configuration for Rasa Core.
 # https://rasa.com/docs/rasa/core/policies/
 policies:
-  - name: RulePolicy
-  - name: FallbackPolicy
   - name: MemoizationPolicy
   - name: TEDPolicy
     max_history: 5
-    epochs: 100  
+    epochs: 200  
+  - name: RulePolicy
+  - name: FallbackPolicy

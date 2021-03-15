@@ -10,7 +10,7 @@ stories:
       - intent: affirm
       - action: document_form
       - active_loop: null
-      - action: utter_submit
+      - action: action_submit_document_form
       - action: utter_slots_values
 
   - story: stop form + stop
@@ -23,3 +23,5 @@ stories:
       - intent: deny
       - action: action_deactivate_loop
       - active_loop: null
+      - action: action_submit_document_form
+      - action: utter_slots_values

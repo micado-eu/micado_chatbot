@@ -1,8 +1,15 @@
 from typing import Dict, Text, Any, List, Union, Optional
 
-from rasa_sdk import Tracker
+from rasa_sdk import Tracker, Action
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormValidationAction
+from rasa_sdk.events import (
+    SlotSet,
+    UserUtteranceReverted,
+    ConversationPaused,
+    EventType,
+    FollowupAction,
+)
 import requests
 import logging
 import os
@@ -18,6 +25,38 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 handler.setFormatter(formatter)
 root.addHandler(handler)
 logger.addHandler(handler)
+
+class ActionSubmitDocumentForm(Action):
+    def name(self) -> Text:
+        return "action_submit_document_form"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[EventType]:
+        """Once we have all the information, attempt to add it to the
+        Google Drive database"""
+
+        import datetime
+
+        document = tracker.get_slot("document")
+
+        try:
+            logger.info("trying doing something")
+            logger.info(document)
+            dispatcher.utter_message(template="utter_slots_values")
+            return []
+        except Exception as e:
+            logger.error(
+                "Failed to do our things. Error: {}" "".format(e.message),
+                exc_info=True,
+            )
+            dispatcher.utter_message(template="utter_slots_values")
+            return []
+
+
 
 class ValidateDocumentForm(FormValidationAction):
     """Example of a custom form action"""
@@ -56,6 +95,7 @@ class ValidateDocumentForm(FormValidationAction):
             "residence permit",
             "stamp duty",
             "identity card",
+            "passport",
         ]
 
 
