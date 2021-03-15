@@ -1,3 +1,4 @@
+version: "2.0"
 intents:
   - chitchat:
       use_entities: []
@@ -16,10 +17,12 @@ entities:
 
 slots:
   document:
-    type: unfeaturized
+    type: text
+    influence_conversation: false
     auto_fill: false
   requested_slot:
     type: unfeaturized
+    influence_conversation: false
 
 #actions:
 #- utter_greet
@@ -40,7 +43,7 @@ responses:
     - text: "You need to tell me what document you need"
   utter_ask_document:
     - text: "what document do you need?"
-  utter_slots_values_document:
+  utter_slots_values:
     - text: "you need to follow the process for the document:\n
              - document: {document}"
   utter_noworries:
@@ -60,7 +63,8 @@ responses:
   utter_default:
     - text: "sorry, I didn't understand you, please try input something else"
   utter_greet:
-    - custom:
+    - text: "salutoni"
+      custom:
         data:
         - type: section
           text:
@@ -77,12 +81,15 @@ responses:
   utter_restart:
     - text: "restarted"
 
+actions:
+- validate_document_form
+
 forms:
   document_form:
     document:
-      - type: from_entity
-        entity: document
-
+    - type: from_entity
+      entity: document
+      not_intent: chitchat
 session_config:
-  session_expiration_time: 5  # value in minutes
-  carry_over_slots_to_new_session: false
+  session_expiration_time: 3  # value in minutes
+  carry_over_slots_to_new_session: true

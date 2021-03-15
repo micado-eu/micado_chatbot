@@ -103,12 +103,14 @@ services:
       - micado_net
 
   action_server:
-    image: rasa/rasa:2.3.1-full
+    image: rasa/rasa-sdk:2.3.1
     volumes:
       - type: volume
         source: chatbot_action
         # target is the path in the container
         target: /app/actions
+    expose: 
+      - 5055
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
     networks:

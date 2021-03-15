@@ -135,6 +135,6 @@ psql -c "ALTER ROLE $RASA_DB_USER IN DATABASE $POSTGRES_DB SET search_path = $RA
 psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA $RASA_SCHEMA GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO $RASA_DB_USER;"
 psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA $RASA_SCHEMA GRANT USAGE ON SEQUENCES TO $RASA_DB_USER;"
 
-echo "\nCreated WSO2_SHARED components, now adding tables\n"
+echo "\nCreated RASA components, now adding tables\n"
 
 #psql -U $RASA_DB_USER -d $POSTGRES_DB -a -q -f /docker-entrypoint-initdb.d/api_shared_postgresql.sql.txt
