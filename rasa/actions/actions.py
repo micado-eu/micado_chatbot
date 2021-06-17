@@ -43,10 +43,20 @@ class ActionSubmitDocumentForm(Action):
 
         document = tracker.get_slot("document")
 
+#        url = "http://10.118.68.78:3000/search_rasa"
+        url = "http://backend:3000/search_rasa"
+
+        logger.info(url)
+
+        params=[('lang','en'), ('words',document)]
+        search_results = requests.get(url, params=params)
+        logger.info(search_results.text)
+        logger.info(search_results.request)
+
         try:
             logger.info("trying doing something")
             logger.info(document)
-            dispatcher.utter_message(template="utter_slots_values")
+            dispatcher.utter_message(search_results.text)
             return []
         except Exception as e:
             logger.error(

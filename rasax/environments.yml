@@ -1,0 +1,7 @@
+rasa:
+  production:
+    url: http://chatbot_en:5005
+    token: ${RASA_TOKEN}
+  worker:
+    url: http://chatbot_en:5005
+    token: ${RASA_TOKEN}
